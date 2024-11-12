@@ -13,11 +13,20 @@ public class MyController {
   @Autowired PersonService personService;
 
   //=========================================================================================================
-  // CAFFEINE CONFIG
+  // GET PERSON
   //=========================================================================================================
   @GetMapping("getPerson")
   public String getPerson(@RequestParam int id) {
-    String person = personService.getPerson(id);
+    String person = personService.getPerson(id, "Extra");
+    return person;
+  }
+
+  //=========================================================================================================
+  // GET PERSON MANUALLY
+  //=========================================================================================================
+  @GetMapping("getPersonManually")
+  public String getPersonManually(@RequestParam int id) {
+    String person = personService.getPersonManually(id, "Extra");
     return person;
   }
 
