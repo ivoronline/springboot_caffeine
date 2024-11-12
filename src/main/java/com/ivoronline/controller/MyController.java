@@ -13,7 +13,7 @@ public class MyController {
   @Autowired PersonService personService;
 
   //=========================================================================================================
-  // CAFFEINE CONFIG
+  // GET PERSON
   //=========================================================================================================
   @GetMapping("getPerson")
   public String getPerson(@RequestParam int id) {
