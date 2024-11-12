@@ -25,24 +25,34 @@ public class PersonService {
     //LOG
     System.out.println("\nENTERED getPerson: " + id);
     
-    //GET MAP FROM CACHE
-    CaffeineCacheManager caffeineCacheManager = (CaffeineCacheManager) cacheManager; //Get implementation
-    CaffeineCache        caffeineCache        = (CaffeineCache) caffeineCacheManager.getCache("PersonCash");
-    Cache                caffeine             = caffeineCache.getNativeCache();
-    Map<Object, Object>  map                  = caffeine.asMap();
-
-    //ITERATE THROUGH KEYS
-    Iterator iterator = map.keySet().iterator();
-    while( iterator.hasNext() == true ) {
-      int key = (int) iterator.next();
-      System.out.println(key + " - " + caffeineCache.get(key).get());
-    }
+    //PRINT CACHE
+    printCache("PersonCash");
     
     //RETURN PERSON
     switch (id) {
       case  1: return "John";
       case  2: return "Susan";
       default: return "Unknown";
+    }
+    
+  }
+  
+  //=========================================================================================================
+  // PRINT CACHE
+  //=========================================================================================================
+  public void printCache(String cacheName) {
+  
+    //GET MAP FROM CACHE
+    CaffeineCacheManager caffeineCacheManager = (CaffeineCacheManager) cacheManager; //Get implementation
+    CaffeineCache        caffeineCache        = (CaffeineCache) caffeineCacheManager.getCache(cacheName);
+    Cache                caffeine             = caffeineCache.getNativeCache();
+    Map<Object, Object>  map                 = caffeine.asMap();
+    
+    //ITERATE THROUGH KEYS
+    Iterator iterator = map.keySet().iterator();
+    while (iterator.hasNext() == true) {
+      int key = (int) iterator.next();
+      System.out.println(key + " - " + caffeineCache.get(key).get());
     }
     
   }
